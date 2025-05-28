@@ -110,7 +110,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
                 width={300}
                 height={400}
                 className="w-auto h-[75px] sm:h-[100px] md:h-[150px] object-contain cursor-pointer hover:scale-105 transition-transform"
-                style={{ transform: "scaleX(-1)" }}
+
                 priority
                 onClick={() => setShowChatbot(!showChatbot)}
               />
