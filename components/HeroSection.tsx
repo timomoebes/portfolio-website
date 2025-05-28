@@ -105,7 +105,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
           >
             <div className="w-[75px] sm:w-[100px] md:w-[150px]">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/character-TF7QhPMDbApc21fwkmpJnCTTj4tC1G.png"
+                src="/placeholder.png"
                 alt="Illustrated character"
                 width={300}
                 height={400}

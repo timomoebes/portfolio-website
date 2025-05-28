@@ -37,7 +37,6 @@ A personal portfolio showcasing engineering projects, technical experience, and 
 - Framer Motion
 - React Three Fiber
 - Lucide Icons
-- Vercel Deployment
 
 ## Installation
 ```bash
@@ -54,11 +53,6 @@ npm run dev
 ```
 
 ## Deployment
-Configured for Vercel. Ensure environment variables are set, then:
-```bash
-npm run build
-npm run start
-```
 
 ## License
 [MIT](LICENSE)
