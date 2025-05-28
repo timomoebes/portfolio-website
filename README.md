@@ -41,7 +41,7 @@ A personal portfolio showcasing engineering projects, technical experience, and 
 ## Installation
 ```bash
 # TODO: Add installation instructions
-# git clone https://github.com/timomoebes/portfolio.git
+# git clone https://github.com/timomoebes/portfolio-website.git 
 # cd portfolio
 npm install
 ```
