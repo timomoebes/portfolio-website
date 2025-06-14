@@ -54,10 +54,10 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
           <h2
             className={`text-xl sm:text-2xl md:text-4xl font-semibold mb-6 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}
           >
-            Engineer & AI Enthusiast
+            AI Engineer with Healthcare Domain Expertise
           </h2>
           <p className={`text-lg md:text-xl mb-8 max-w-2xl ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Transforming complex technical challenges into elegant solutions, bridging the gap between innovation and
+            From medical devices to intelligent systems - building AI that solves real problems
             reliability.
           </p>
 

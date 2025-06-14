@@ -14,9 +14,10 @@ export default function AboutSection({ id }: { id?: string }) {
       >
         <h2 className="text-4xl font-bold mb-4">About Me</h2>
         <p className="text-xl max-w-2xl mx-auto">
-          Passionate Technical Services Engineer with a strong background in product support, infrastructure analysis,
-          and software development. Experienced in conducting in-depth investigations, providing comprehensive product
-          guidance, and developing innovative solutions.
+          Healthcare technology professional who rapidly transitioned into AI engineering, 
+achieving measurable production results (40% efficiency improvements) in my first 
+year working with enterprise AI systems. Unique combination of medical device 
+experience and modern AI development capabilities.
         </p>
       </motion.div>
     </section>
