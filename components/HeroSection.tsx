@@ -58,7 +58,6 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
           </h2>
           <p className={`text-lg md:text-xl mb-8 max-w-2xl ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
             From medical devices to intelligent systems - building AI that solves real problems
-            reliability.
           </p>
 
           <motion.div
