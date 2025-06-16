@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Portfolio by Timo Möbes',
-  description: 'Built with love ❤️',
+  description: 'A personal portfolio showcasing engineering projects, technical experience, and AI explorations by Timo Möbes.',
 }
 
 export default function RootLayout({
