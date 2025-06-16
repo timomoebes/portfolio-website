@@ -108,7 +108,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
             onClick={() => setShowChatbot(!showChatbot)}
           >
             <Image
-              src="/images/timo-head.png"
+              src="/character.png"
               alt="Chat with me"
               width={80}
               height={80}
