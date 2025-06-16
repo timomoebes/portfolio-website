@@ -9,24 +9,24 @@ const education = [
       "Learning to create relational databases, construct SQL queries, and work with advanced SQL techniques.",
   },
   {
-    title: "Introduction to Generative AI",
-    institution: "Google Cloud",
-    date: "12/2024",
-    description: "Learned about generative AI, its workings, types of models, and applications.",
-  },
-  {
     title: "Google Prompting Essentials",
     institution: "Google",
-    date: "Mar 2025",
+    date: "03/2025",
     description: "Mastered the art of prompt engineering by learning a five-step process to write clear, specific, and effective instructions for generative AI, enhancing productivity and achieving superior results from AI models.",
     skills: ["Prompt Engineering", "Generative AI", "Problem Solving"]
   },
   {
     title: "AI Essentials for Tech - Certification",
     institution: "Doctolib",
-    date: "Feb 2025",
+    date: "02/2025",
     description: "Acquired a foundational understanding of how AI is responsibly applied within the Doctolib ecosystem to enhance healthcare solutions, covering patient data privacy, AI-powered medical assistants, and the integration of technologies like Azure AI.",
     skills: ["Artificial Intelligence (AI)", "Deep Learning", "AI Systems"]
+  },
+  {
+    title: "Introduction to Generative AI",
+    institution: "Google Cloud",
+    date: "12/2024",
+    description: "Learned about generative AI, its workings, types of models, and applications.",
   },
   {
     title: "Bachelor of Engineering in Health Electronics",
