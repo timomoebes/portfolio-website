@@ -122,7 +122,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="fixed bottom-24 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-sm md:absolute md:bottom-full md:right-full md:left-auto md:translate-x-0 md:mr-4 md:mb-2 md:w-80"
+                className="fixed inset-0 z-50 h-full w-full md:absolute md:inset-auto md:bottom-full md:right-full md:h-auto md:w-80 md:mr-4 md:mb-2"
               >
                 <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
               </motion.div>
