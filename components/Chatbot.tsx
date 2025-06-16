@@ -129,8 +129,8 @@ export default function Chatbot({ initialMessage, showChatbot, onClose }: Chatbo
     <div
       ref={chatboxRef}
       className={`
-        w-full h-full md:w-[380px] md:h-[480px] md:rounded-lg shadow-lg flex flex-col
-        ${theme === "dark" ? "bg-gray-900 md:border md:border-gray-800" : "bg-white md:border md:border-gray-200"}
+        w-full h-[480px] rounded-lg shadow-lg flex flex-col
+        ${theme === "dark" ? "bg-gray-900 border border-gray-800" : "bg-white border border-gray-200"}
       `}
     >
       {/* Header */}
