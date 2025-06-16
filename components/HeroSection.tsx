@@ -18,7 +18,6 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
   const { theme } = useTheme()
   const [showChatbot, setShowChatbot] = useState(false)
 
-  // Open chatbot when query is received
   useEffect(() => {
     if (chatQuery) {
       setShowChatbot(true)
@@ -27,10 +26,12 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
 
   return (
     <section id="hero" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Background Color */}
       <div
         className={`absolute inset-0 ${theme === "dark" ? "bg-gradient-to-b from-blue-950 to-black" : "bg-gradient-to-b from-blue-100 to-white"}`}
       />
 
+      {/* Animated 3D Background */}
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <Suspense fallback={null}>
@@ -39,6 +40,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
         </Canvas>
       </div>
 
+      {/* Main Text Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center md:flex-row md:items-start md:justify-between">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -94,39 +96,38 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
             </Link>
           </motion.div>
         </motion.div>
+      </div>
 
-        <div className="fixed bottom-4 right-4 z-50">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative cursor-pointer"
+      {/* FIXED Character Component */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <div className="relative">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="p-0 bg-transparent rounded-full shadow-lg"
+            onClick={() => setShowChatbot(!showChatbot)}
           >
-            <div className="w-[75px] sm:w-[100px] md:w-[150px]">
-              <Image
-                src="/character.png"
-                alt="Illustrated character"
-                width={300}
-                height={400}
-                className="w-auto h-[75px] sm:h-[100px] md:h-[150px] object-contain cursor-pointer hover:scale-105 transition-transform"
-
-                priority
-                onClick={() => setShowChatbot(!showChatbot)}
-              />
-            </div>
-            <AnimatePresence>
-              {showChatbot && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute bottom-0 right-full mb-0 mr-4"
-                >
-                  <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+            <Image
+              src="/images/timo-head.png"
+              alt="Chat with me"
+              width={80}
+              height={80}
+              className="object-contain"
+            />
+          </motion.button>
+          <AnimatePresence>
+            {showChatbot && (
+              <motion.div
+                key="chatbot"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                className="absolute bottom-full right-0 mb-2 w-80"
+              >
+                <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
