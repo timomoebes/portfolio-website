@@ -12,7 +12,7 @@ const education = [
     title: "Google Prompting Essentials",
     institution: "Google",
     date: "03/2025",
-    description: "Mastered the art of prompt engineering by learning a five-step process to write clear, specific, and effective instructions for generative AI, enhancing productivity and achieving superior results from AI models.",
+    description: "Adapted the art of prompt engineering by learning Google's five-step process to write clear, specific, and effective instructions for generative AI, enhancing productivity and achieving superior results from AI models.",
     skills: ["Prompt Engineering", "Generative AI", "Problem Solving"]
   },
   {

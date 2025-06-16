@@ -98,38 +98,38 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
         </motion.div>
       </div>
 
-      {/* FIXED Character Component */}
+      {/* FIXED Character Icon */}
       <div className="fixed bottom-4 right-4 z-50">
-        <div className="relative">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="p-0 bg-transparent rounded-full shadow-lg"
-            onClick={() => setShowChatbot(!showChatbot)}
-          >
-            <Image
-              src="/character.png"
-              alt="Chat with me"
-              width={80}
-              height={80}
-              className="object-contain"
-            />
-          </motion.button>
-          <AnimatePresence>
-            {showChatbot && (
-              <motion.div
-                key="chatbot"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                className="fixed bottom-4 z-50 w-[calc(100%-2rem)] left-1/2 -translate-x-1/2 max-w-sm md:absolute md:w-80 md:bottom-full md:right-full md:left-auto md:translate-x-0 md:mr-4 md:mb-2"
-              >
-                <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="p-0 bg-transparent rounded-full shadow-lg"
+          onClick={() => setShowChatbot(!showChatbot)}
+        >
+          <Image
+            src="/character.png"
+            alt="Chat with me"
+            width={80}
+            height={80}
+            className="object-contain"
+          />
+        </motion.button>
       </div>
+
+      {/* FIXED Chatbot */}
+      <AnimatePresence>
+        {showChatbot && (
+          <motion.div
+            key="chatbot"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-4 z-40 inset-x-4 max-w-sm mx-auto md:bottom-24 md:right-4 md:inset-x-auto md:w-80 md:mx-0"
+          >
+            <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
