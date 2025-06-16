@@ -13,6 +13,25 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
+/* Mobile-first responsive typography */
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    html {
+      font-size: 13px;
+    }
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

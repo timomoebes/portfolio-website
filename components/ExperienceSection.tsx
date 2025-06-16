@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "./ThemeProvider"
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { useIsMobile } from "../hooks/use-mobile"
 
 interface Experience {
   title: string
@@ -168,6 +169,7 @@ const experiences: Experience[] = [
 
 export default function ExperienceSection({ id }: { id?: string }) {
   const { theme } = useTheme()
+  const isMobile = useIsMobile()
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null)
   const [expandedExperiences, setExpandedExperiences] = useState(false)
 
@@ -176,18 +178,20 @@ export default function ExperienceSection({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className={`min-h-screen flex items-center justify-center py-16
+      className={`min-h-screen flex items-center justify-center ${isMobile ? 'py-12 px-4' : 'py-16'}
         ${theme === "dark" ? "bg-gradient-to-br from-blue-900 to-green-900" : "bg-gradient-to-br from-blue-50 to-green-50"}
       `}
     >
-      <div className="container mx-auto px-4">
-        <h2 className={`text-4xl font-bold mb-16 text-center ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+      <div className={`container mx-auto ${isMobile ? 'px-2' : 'px-4'}`}>
+        <h2 className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold ${isMobile ? 'mb-8' : 'mb-16'} text-center ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
           Experience
         </h2>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200" />
+          {/* Timeline line - hidden on mobile for cleaner look */}
+          {!isMobile && (
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200" />
+          )}
 
           {visibleExperiences.map((exp, index) => (
             <motion.div
@@ -196,29 +200,38 @@ export default function ExperienceSection({ id }: { id?: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className={`relative flex items-center mb-16`}
+              className={`relative flex items-center ${isMobile ? 'mb-6' : 'mb-16'}`}
             >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500" />
+              {/* Timeline dot - only show on desktop */}
+              {!isMobile && (
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-blue-500" />
+              )}
 
               {/* Content card */}
               <motion.div
                 className={`
-                  w-5/12 p-6 rounded-lg cursor-pointer transform transition-all duration-300
+                  ${isMobile 
+                    ? 'w-full p-4 rounded-xl' 
+                    : `w-5/12 p-6 rounded-lg ${index % 2 === 0 ? "ml-auto" : "mr-auto"}`
+                  }
+                  cursor-pointer transform transition-all duration-300
                   ${theme === "dark" ? "bg-white/10 hover:bg-white/20" : "bg-white hover:bg-gray-50 shadow-lg"}
                   ${selectedExp === exp ? "scale-105" : "hover:scale-102"}
-                  ${index % 2 === 0 ? "ml-auto" : "mr-auto"}
                 `}
                 onClick={() => setSelectedExp(exp === selectedExp ? null : exp)}
               >
-                <h3 className={`text-xl font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+                <h3 className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"} leading-tight`}>
                   {exp.title}
                 </h3>
-                <h4 className={`text-lg mb-2 ${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>
+                <h4 className={`${isMobile ? 'text-base' : 'text-lg'} mb-2 ${theme === "dark" ? "text-gray-300" : "text-gray-700"} font-medium`}>
                   {exp.company}
                 </h4>
-                <p className={`text-sm mb-4 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>{exp.period}</p>
-                <p className={`mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{exp.description}</p>
+                <p className={`${isMobile ? 'text-xs' : 'text-sm'} mb-3 ${theme === "dark" ? "text-gray-400" : "text-gray-600"} font-medium`}>
+                  {exp.period}
+                </p>
+                <p className={`${isMobile ? 'text-sm leading-relaxed' : 'text-base'} mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
+                  {exp.description}
+                </p>
 
                 <AnimatePresence>
                   {selectedExp === exp && (
@@ -229,20 +242,20 @@ export default function ExperienceSection({ id }: { id?: string }) {
                       className="overflow-hidden"
                     >
                       <ul
-                        className={`list-disc list-inside mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}
+                        className={`list-disc ${isMobile ? 'list-inside ml-2' : 'list-inside'} mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"} space-y-1`}
                       >
                         {exp.details.map((detail, i) => (
-                          <li key={i} className="mb-1">
+                          <li key={i} className={`${isMobile ? 'text-sm leading-relaxed' : 'text-base'}`}>
                             {detail}
                           </li>
                         ))}
                       </ul>
-                      <div className="flex flex-wrap gap-2">
+                      <div className={`flex flex-wrap gap-2 ${isMobile ? 'mt-3' : ''}`}>
                         {exp.technologies.map((tech, i) => (
                           <span
                             key={i}
                             className={`
-                              text-xs px-2 py-1 rounded-full
+                              ${isMobile ? 'text-xs px-2 py-1' : 'text-xs px-2 py-1'} rounded-full font-medium
                               ${theme === "dark" ? "bg-blue-500/20 text-blue-200" : "bg-blue-100 text-blue-800"}
                             `}
                           >
@@ -253,6 +266,13 @@ export default function ExperienceSection({ id }: { id?: string }) {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                {/* Mobile indicator for expandable content */}
+                {isMobile && (
+                  <div className={`mt-3 text-center ${theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
+                    <ChevronDown className={`w-4 h-4 mx-auto transition-transform duration-200 ${selectedExp === exp ? 'rotate-180' : ''}`} />
+                  </div>
+                )}
               </motion.div>
             </motion.div>
           ))}
@@ -263,7 +283,7 @@ export default function ExperienceSection({ id }: { id?: string }) {
             <button
               onClick={() => setExpandedExperiences(!expandedExperiences)}
               className={`
-                flex items-center gap-2 px-4 py-2 rounded-full text-sm transition-colors duration-200
+                flex items-center gap-2 ${isMobile ? 'px-6 py-3 text-base' : 'px-4 py-2 text-sm'} rounded-full transition-colors duration-200 font-medium
                 ${
                   theme === "dark"
                     ? "bg-white/10 text-white hover:bg-white/20"
