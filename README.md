@@ -1,61 +1,59 @@
 # Portfolio by Timo Möbes
 
-A personal portfolio showcasing engineering projects, technical experience, and AI explorations. Built with Next.js, React Three Fiber, Framer Motion, and Tailwind CSS.
+A personal portfolio showcasing engineering projects, technical experience, and AI explorations. Built with a modern tech stack for a fast, responsive, and visually engaging user experience.
 
-## Table of Contents
-- [Features](#features)
-- [Demo](#demo)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [Development](#development)
-- [Deployment](#deployment)
-- [License](#license)
-- [Author](#author)
+**Live Demo:** [**timomoebes.com**](https://timomoebes.com)
 
-## Features
-- **Hero Section** with animated 3D background and interactive chatbot trigger
-- **Experience Timeline** with collapsible entries and responsive layout
-- **Dark/Light Theme** toggle via Context API
-- **Image Optimization**
-  - Next.js `<Image>` component for external assets
-  - WebP/AVIF support configured in `next.config.mjs`
-  - Domain whitelisting for optimized delivery
-- **Smooth Animations** using Framer Motion
-- **SEO & Accessibility**
-  - Semantic HTML5 sections and headings
-  - Descriptive `alt` text on images
-  - Metadata and Open Graph tags in `app/layout.tsx`
-- **Performance Metrics** placeholder for `reportWebVitals`
+## Key Features
 
-## Demo
-#  Live demo: [https://timomoebes.com](#)
+- **Interactive 3D Background:** Engaging hero section built with React Three Fiber.
+- **Mobile-First Responsive Design:** Seamless experience across all devices, featuring a hamburger menu and optimized layouts.
+- **Dynamic Content Sections:** Detailed Experience and Education timelines with expandable entries.
+- **Dark/Light Mode:** User-selectable theme preference.
+- **Custom Favicon & Metadata:** Enhanced branding and SEO.
+- **Smooth Animations:** Fluid transitions and effects powered by Framer Motion.
 
-## Technologies
-- Next.js 14 (App Router)
-- React 18
-- Tailwind CSS
-- Framer Motion
-- React Three Fiber
-- Lucide Icons
+## Technologies Used
 
-## Installation
-```bash
-# TODO: Add installation instructions
-# git clone https://github.com/timomoebes/portfolio-website.git 
-# cd portfolio
-npm install
-```
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion
+- **3D Graphics:** React Three Fiber
+- **Language:** TypeScript
+- **Deployment:** Vercel
 
-## Development
-```bash
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/timomoebes/portfolio-website.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd portfolio-website
+   ```
+3. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+### Running in Development Mode
+
+To start the development server:
+```sh
 npm run dev
-# Open http://localhost:3000
 ```
-
-## Deployment
-
-## License
-[MIT](LICENSE)
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## Author
-Timo Möbes — [GitHub](https://github.com/timomoebes) | [LinkedIn](https://www.linkedin.com/in/timomoebes)
+
+**Timo Möbes**
+- [GitHub](https://github.com/timomoebes)
+- [LinkedIn](https://www.linkedin.com/in/timomoebes)

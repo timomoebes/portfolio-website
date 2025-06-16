@@ -31,7 +31,7 @@ const experiences: Experience[] = [
     technologies: ["SQL", "JavaScript", "Troubleshooting", "Jira", "GenAI"],
   },
   {
-    title: "IT Consultant",
+    title: "Technical Consultant",
     company: "DTB Deutsche Technikberatung",
     period: "Apr 2019 - Aug 2024",
     description:

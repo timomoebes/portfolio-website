@@ -15,6 +15,20 @@ const education = [
     description: "Learned about generative AI, its workings, types of models, and applications.",
   },
   {
+    title: "Google Prompting Essentials",
+    institution: "Google",
+    date: "Mar 2025",
+    description: "Mastered the art of prompt engineering by learning a five-step process to write clear, specific, and effective instructions for generative AI, enhancing productivity and achieving superior results from AI models.",
+    skills: ["Prompt Engineering", "Generative AI", "Problem Solving"]
+  },
+  {
+    title: "AI Essentials for Tech - Certification",
+    institution: "Doctolib",
+    date: "Feb 2025",
+    description: "Acquired a foundational understanding of how AI is responsibly applied within the Doctolib ecosystem to enhance healthcare solutions, covering patient data privacy, AI-powered medical assistants, and the integration of technologies like Azure AI.",
+    skills: ["Artificial Intelligence (AI)", "Deep Learning", "AI Systems"]
+  },
+  {
     title: "Bachelor of Engineering in Health Electronics",
     institution: "Berlin University of Applied Sciences",
     period: "10/2018 - 09/2023",
@@ -22,7 +36,7 @@ const education = [
       "Gained broad knowledge in natural and engineering sciences, particularly in electrical engineering, microelectronics, and computer science.",
   },
   {
-    title: "Python Programming Certificate of Achievement",
+    title: "Python Programming Certificate",
     institution: "Mimo",
     date: "07/2022",
     description: "Developed a thorough understanding of Python syntax and problem-solving strategies.",
