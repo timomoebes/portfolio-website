@@ -7,6 +7,13 @@ import Link from "next/link"
 
 const projects = [
   {
+    title: "AI Research Agent LangGraph",
+    tech: "Python, LangGraph, OpenAI GPT-4, Firecrawl, Pydantic, REST APIs",
+    githubUrl: "https://github.com/timomoebes/ai-research-agent-langgraph",
+    description:
+      "Developed an intelligent AI research agent that automatically discovers, analyzes, and compares developer tools and technologies through advanced web scraping and LLM-powered analysis. Built with a sophisticated multi-step workflow using LangGraph orchestration, featuring structured data extraction with Pydantic models, comprehensive web content analysis via Firecrawl API, and intelligent recommendation generation. The system demonstrates expertise in AI agent architecture, workflow automation, and enterprise-grade data processing pipelines with both simple CLI interfaces and advanced research capabilities.",
+  },
+  {
     title: "Interactive Portfolio Website",
     tech: "TypeScript, Next.js, React, Tailwind CSS, Framer Motion, Three.js, GenAI",
     description:
