@@ -7,7 +7,7 @@ import Link from "next/link"
 
 const projects = [
   {
-    title: "AI Research Agent LangGraph",
+    title: "AI Research Agent",
     tech: "Python, LangGraph, OpenAI GPT-4, Firecrawl, Pydantic, REST APIs",
     githubUrl: "https://github.com/timomoebes/ai-research-agent-langgraph",
     description:
