@@ -52,6 +52,10 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
+## Project Management
+
+This project's development is tracked using `planning.md` for high-level goals and `tasks.md` for specific, actionable items. This ensures a structured approach to development and clear visibility into the project's progress.
+
 ## Author
 
 **Timo Möbes**

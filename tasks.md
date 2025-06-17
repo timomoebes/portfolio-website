@@ -12,4 +12,12 @@ This file tracks specific, actionable tasks.
 - [x] ~~Research and add "Google Prompting Essentials" certification.~~
 - [x] ~~Research and add "AI Essentials for Tech - Doctolib" certification.~~
 - [x] ~~Remove the word "achievement" from the Mimo Python entry.~~
-- [ ] Commit and push all changes in a single update.
+- [x] ~~Commit and push all changes in a single update.~~
+
+## Future Enhancements
+
+- [ ] Add a dedicated blog section.
+- [ ] Implement a CMS for easier content management.
+- [ ] Explore advanced animations and interactive elements.
+- [ ] Add more projects to the portfolio.
+- [ ] Write unit and integration tests.
