@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { calculateReadingTime, generateSlug } from '@/lib/reading-time'
 
 interface BlogPostForm {
   title: string
@@ -102,13 +103,10 @@ export default function EditPostPage() {
     }
   }
 
-  const generateSlug = (title: string): string => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim()
+  // Auto-update reading time when content changes
+  const updateReadingTime = (content: string) => {
+    const readingTime = calculateReadingTime(content)
+    return readingTime.text
   }
 
   const handleTitleChange = (title: string) => {
@@ -117,6 +115,13 @@ export default function EditPostPage() {
       title,
       // Only auto-generate slug if it hasn't been manually modified
       slug: prev.slug === generateSlug(prev.title) ? generateSlug(title) : prev.slug
+    }))
+  }
+
+  const handleContentChange = (content: string) => {
+    setFormData(prev => ({
+      ...prev,
+      content
     }))
   }
 
@@ -136,13 +141,15 @@ export default function EditPostPage() {
         return
       }
 
+      const readingTime = calculateReadingTime(formData.content)
+      
       const blogData = {
         title: formData.title,
         slug: formData.slug,
         excerpt: formData.excerpt,
         content: formData.content,
         category: formData.category,
-        read_time: `${Math.ceil(formData.content.split(' ').length / 200)} min read`,
+        read_time: readingTime.text,
         published: asDraft ? false : formData.published,
         image_url: formData.imageUrl || null,
         tags: formData.tags.length > 0 ? formData.tags : null,
@@ -509,11 +516,19 @@ export default function EditPostPage() {
                     <div>
                       <Textarea
                         value={formData.content}
-                        onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                        onChange={(e) => handleContentChange(e.target.value)}
                         rows={25}
                         className="w-full font-mono text-sm"
                         placeholder="Start writing your blog post content here..."
                       />
+                      
+                      {/* Live Reading Time Display */}
+                      {formData.content && (
+                        <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-4">
+                          <span>📖 {updateReadingTime(formData.content)}</span>
+                          <span>📝 {calculateReadingTime(formData.content).words} words</span>
+                        </div>
+                      )}
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                         Supports Markdown: # Headers, **bold**, *italic*, `code`, ```code blocks```, lists, and more
                       </p>

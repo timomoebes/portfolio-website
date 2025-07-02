@@ -84,7 +84,7 @@ This file tracks the development progress and upcoming enhancements for the port
 - [ ] **Reading progress indicator** - Show reading progress on blog posts
 - [ ] **Print-friendly blog layouts** - Optimized print styles
 - [ ] **Bookmark functionality** - Allow users to save favorite posts
-- [ ] **Reading time estimation** - Auto-calculate and display reading time
+- [x] ~~**Reading time estimation** - Smart auto-calculation with live preview and word count~~
 - [ ] **Table of contents** - Auto-generate TOC for long blog posts
 
 ### Priority 4: Admin Panel Enhancements ✅ MAJOR IMPROVEMENTS COMPLETED
