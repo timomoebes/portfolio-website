@@ -11,6 +11,7 @@ const AboutSection = dynamic(() => import("@/components/AboutSection"))
 const ExperienceSection = dynamic(() => import("@/components/ExperienceSection"))
 const SkillsSection = dynamic(() => import("@/components/SkillsSection"))
 const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"))
+const BlogSection = dynamic(() => import("@/components/BlogSection"))
 const EducationSection = dynamic(() => import("@/components/EducationSection"))
 const Footer = dynamic(() => import("@/components/Footer"))
 const BackToTop = dynamic(() => import("@/components/BackToTop"))
@@ -31,6 +32,7 @@ export default function Home() {
             <ExperienceSection id="experience" />
             <SkillsSection id="skills" onChatQuery={setChatQuery} />
             <ProjectsSection id="projects" />
+            <BlogSection id="blog" />
             <EducationSection id="education" />
           </motion.div>
         </div>
