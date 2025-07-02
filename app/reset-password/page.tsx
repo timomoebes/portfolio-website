@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
@@ -10,6 +10,16 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 export default function ResetPasswordPage() {
+  return (
+    <ThemeProvider>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ResetPasswordPageContent />
+      </Suspense>
+    </ThemeProvider>
+  )
+}
+
+function ResetPasswordPageContent() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -83,67 +93,63 @@ export default function ResetPasswordPage() {
 
   if (success) {
     return (
-      <ThemeProvider>
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900 dark:to-purple-900">
-          <Card className="w-full max-w-md bg-background text-foreground shadow-lg border">
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-green-600 mb-4">Password Updated!</h2>
-                <p className="text-muted-foreground mb-4">
-                  Your password has been successfully updated. Redirecting to login...
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </ThemeProvider>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900 dark:to-purple-900">
+        <Card className="w-full max-w-md bg-background text-foreground shadow-lg border">
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-green-600 mb-4">Password Updated!</h2>
+              <p className="text-muted-foreground mb-4">
+                Your password has been successfully updated. Redirecting to login...
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900 dark:to-purple-900">
-        <Card className="w-full max-w-md bg-background text-foreground shadow-lg border">
-          <CardHeader>
-            <CardTitle>Reset Password</CardTitle>
-            <CardDescription>
-              Enter your new password below
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleResetPassword} className="space-y-4">
-              <div>
-                <Input
-                  type="password"
-                  placeholder="New Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={6}
-                />
-              </div>
-              <div>
-                <Input
-                  type="password"
-                  placeholder="Confirm New Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  minLength={6}
-                />
-              </div>
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'Updating Password...' : 'Update Password'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    </ThemeProvider>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900 dark:to-purple-900">
+      <Card className="w-full max-w-md bg-background text-foreground shadow-lg border">
+        <CardHeader>
+          <CardTitle>Reset Password</CardTitle>
+          <CardDescription>
+            Enter your new password below
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleResetPassword} className="space-y-4">
+            <div>
+              <Input
+                type="password"
+                placeholder="New Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+            </div>
+            <div>
+              <Input
+                type="password"
+                placeholder="Confirm New Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                minLength={6}
+              />
+            </div>
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? 'Updating Password...' : 'Update Password'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
