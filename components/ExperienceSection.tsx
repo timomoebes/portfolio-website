@@ -28,7 +28,7 @@ const experiences: Experience[] = [
       "Developing and maintaining support documentation",
       "Collaborating with development teams for product improvements",
     ],
-    technologies: ["SQL", "JavaScript", "Troubleshooting", "Jira", "Asana", "GenAI"],
+    technologies: ["SQL", "JavaScript", "Troubleshooting", "Jira", "Asana", "Context Engineering","GenAI", "LLMs"],
   },
   {
     title: "Onboarding Buddy AI Agent Developer",
@@ -41,7 +41,7 @@ const experiences: Experience[] = [
       "Integrated agents for collaborative query handling and data access",
       "Ensured compliance with healthcare data privacy standards", 
     ], 
-    technologies: ["Dust (dust.tt)", "No-Code AI", "Prompt Engineering", "Healthcare Compliance", "GenAI"]
+    technologies: ["Dust (dust.tt)", "No-Code AI", "Context Engineering", "Healthcare Compliance", "GenAI", "LLMs"]
   },
   {
     title: "Technical Consultant",
