@@ -35,7 +35,7 @@ const experiences: Experience[] = [
     company: "Doctolib",
     period: "Apr 2025 - today",
     description:
-      "Designed and implemented the Onboarding Buddy, an AI-driven assistant powered by Dust (dust.tt), to automate employee onboarding at Doctolib. The system uses 4 interconnected AI agents (HR Buddy, IT Helper, Culture Ambassador, Job-Specific Guide) to provide seamless guidance on HR policies, IT setup, company culture, and role-specific training. Inspired by participation in the Dust AI Agents Hackathon (Paris, June 2025), the project enhances onboarding efficiency while ensuring GDPR and HIPAA compliance.",
+      "Designed and implemented the Onboarding Buddy, an AI-driven assistant powered by Dust (dust.tt), to automate employee onboarding at Doctolib. The system uses 4 interconnected AI agents (HR Buddy, IT Helper, Culture Ambassador, Job-Specific Guide) to provide seamless guidance on HR policies, IT setup, company culture, and role-specific training. Inspired by participation in the first Dust AI Agents Hackathon (Paris, April 11, 2025), the project enhances onboarding efficiency while ensuring GDPR and HIPAA compliance.",
     details: [ 
       "Developed 4 specialized AI agents using Dust's no-code platform", 
       "Integrated agents for collaborative query handling and data access",
