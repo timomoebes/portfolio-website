@@ -21,7 +21,7 @@ const experiences: Experience[] = [
     company: "Doctolib",
     period: "Jul 2024 - today",
     description:
-      "I work as an engineer in a second-layer support team, where I troubleshoot complex product issues, provide integration solutions to customers, and identify bugs while collaborating closely with developers to resolve them. I handle knowledge management, bug prioritization, and internal escalations. I enhance our support workflows by leveraging AI and prompt engineering techniques.",
+      "I work as an engineer in a second-layer support team, where I troubleshoot complex product issues, provide integration solutions to customers, and identify bugs while collaborating closely with developers to resolve them. I handle knowledge management, bug prioritization, and internal escalations. I enhance our support workflows by leveraging AI systems and context engineering techniques.",
     details: [
       "Investigating and resolving complex technical issues",
       "Providing comprehensive product guidance to clients",
