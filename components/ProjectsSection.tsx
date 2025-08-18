@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion"
 import { useTheme } from "./ThemeProvider"
-import { Github } from "lucide-react"
+import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 const projects = [
   {
     title: "Simplify Yourself - Website Remake",
     tech: "HTML5, CSS3, JavaScript, Three.js, Progressive Web App (PWA), Git",
+    websiteUrl: "https://simplify-yourself.com",
     description:
       "Transformed a dated WordPress minimalism blog into a modern, fast, and responsive web experience featuring dynamic content loading and interactive 3D visual effects. Implemented responsive design with modern UI/UX principles, interactive Three.js hero animations, and dynamic blog post loading with search functionality. Created PWA capabilities for offline access, custom favicon system with brand identity, and optimized performance with SEO improvements. The remake focuses on clean, intentional design that reflects minimalist philosophy while providing an engaging user experience across all devices.",
   },
@@ -106,18 +107,32 @@ export default function ProjectsSection({ id }: { id?: string }) {
                 <h3 className={`text-2xl font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                   {project.title}
                 </h3>
-                {project.githubUrl && (
-                  <Link
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-2 rounded-full transition-colors ${
-                      theme === "dark" ? "hover:bg-white/10" : "hover:bg-gray-100"
-                    }`}
-                  >
-                    <Github className="w-5 h-5" />
-                  </Link>
-                )}
+                <div className="flex gap-2">
+                  {project.websiteUrl && (
+                    <Link
+                      href={project.websiteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-2 rounded-full transition-colors ${
+                        theme === "dark" ? "hover:bg-white/10" : "hover:bg-gray-100"
+                      }`}
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </Link>
+                  )}
+                  {project.githubUrl && (
+                    <Link
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-2 rounded-full transition-colors ${
+                        theme === "dark" ? "hover:bg-white/10" : "hover:bg-gray-100"
+                      }`}
+                    >
+                      <Github className="w-5 h-5" />
+                    </Link>
+                  )}
+                </div>
               </div>
               <p className={`text-sm mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{project.tech}</p>
               <p className={theme === "dark" ? "text-gray-400" : "text-gray-700"}>{project.description}</p>
