@@ -16,6 +16,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Cursor IDE (local rules, not for repo)
+.cursor/
+
 # env files
 .env*
 
