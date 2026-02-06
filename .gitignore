@@ -19,6 +19,9 @@ yarn-error.log*
 # Cursor IDE (local rules, not for repo)
 .cursor/
 
+# Claude (local settings, not for repo)
+.claude/
+
 # env files
 .env*
 
