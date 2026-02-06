@@ -1,11 +1,9 @@
 import { MetadataRoute } from 'next'
-import { createSupabaseClient } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://your-domain.com'
-  const supabase = createSupabaseClient()
 
-  // Get all published blog posts
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('slug, updated_at, date')
@@ -58,7 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Blog post pages
+  // Blog post pages (from Supabase)
   const blogPages: MetadataRoute.Sitemap = posts?.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.updated_at),

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Clock } from 'lucide-react'
-import { createSupabaseClient } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import type { BlogPost } from '@/lib/supabase'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -13,27 +13,15 @@ interface BlogPostPageProps {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const supabase = createSupabaseClient()
-    
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
       .eq('slug', slug)
       .eq('published', true)
       .single()
-    
-    if (error) {
-      console.error('Blog post fetch error:', error)
-      return null
-    }
-    
-    if (!data) {
-      return null
-    }
-    
+    if (error || !data) return null
     return data
-  } catch (error) {
-    console.error('Blog post fetch exception:', error)
+  } catch {
     return null
   }
 }
@@ -317,13 +305,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 }
 
 export async function generateStaticParams() {
-  const supabase = createSupabaseClient()
-  
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('slug')
     .eq('published', true)
     .not('slug', 'is', null)
-  
-  return posts?.map(post => ({ slug: post.slug })) || []
+  return posts?.map((post) => ({ slug: post.slug })) || []
 }

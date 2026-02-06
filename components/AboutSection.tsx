@@ -14,10 +14,7 @@ export default function AboutSection({ id }: { id?: string }) {
       >
         <h2 className="text-4xl font-bold mb-4">About Me</h2>
         <p className="text-xl max-w-2xl mx-auto">
-          Healthcare technology professional who rapidly transitioned into AI engineering, 
-achieving measurable production results (40% efficiency improvements) in my first 
-year working with enterprise AI systems. Unique combination of medical device 
-experience and modern AI development capabilities.
+          Healthcare technology professional who transitioned into AI engineering, bringing medical device precision to enterprise systems development. Within the first year, delivered significant performance gains—driving efficiency improvements that transformed operational workflows at scale. This unique blend of regulated engineering experience and modern AI capabilities enables a distinctive approach to building reliable, production-ready solutions that bridge technical innovation with real-world impact.
         </p>
       </motion.div>
     </section>

@@ -13,6 +13,8 @@ export interface BlogPost {
   category: string
   tags: string[]
   published: boolean
+  slug?: string
+  image_url?: string
 }
 
 export interface Project {
@@ -59,6 +61,28 @@ export async function getBlogPost(id: string): Promise<BlogPost | null> {
     console.error('Error loading blog post:', error)
     return null
   }
+}
+
+// Get a single blog post by slug (for /blog/[slug] URLs)
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    const filePath = path.join(process.cwd(), 'content/blog/posts.json')
+    const fileContents = await fs.readFile(filePath, 'utf8')
+    const data: CMSData = JSON.parse(fileContents)
+    const post = data.posts.find(
+      (p) => (p.slug || p.id) === slug && p.published
+    )
+    return post || null
+  } catch (error) {
+    console.error('Error loading blog post by slug:', error)
+    return null
+  }
+}
+
+// Get all slugs for static params / sitemap (published only)
+export async function getBlogSlugs(): Promise<string[]> {
+  const posts = await getBlogPosts()
+  return posts.map((p) => p.slug || p.id)
 }
 
 // Get projects from CMS (fallback to hardcoded data if file doesn't exist)

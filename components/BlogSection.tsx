@@ -5,14 +5,20 @@ import { useTheme } from "./ThemeProvider"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { supabase, BlogPost } from "@/lib/supabase"
+import { createSupabaseClient, type BlogPost } from "@/lib/supabase"
 
-export default function BlogSection({ id }: { id?: string }) {
+export default function BlogSection({ id, posts: initialPosts }: { id?: string; posts?: BlogPost[] }) {
   const { theme } = useTheme()
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialPosts ?? [])
+  const [loading, setLoading] = useState(typeof initialPosts === 'undefined')
 
   useEffect(() => {
+    if (typeof initialPosts !== 'undefined') {
+      setBlogPosts(initialPosts)
+      setLoading(false)
+      return
+    }
+    const supabase = createSupabaseClient()
     const fetchBlogPosts = async () => {
       try {
         const { data, error } = await supabase
@@ -20,22 +26,15 @@ export default function BlogSection({ id }: { id?: string }) {
           .select('*')
           .eq('published', true)
           .order('date', { ascending: false })
-
-        if (error) {
-          console.error('Error fetching blog posts:', error)
-          return
-        }
-
-        setBlogPosts(data || [])
+        if (!error) setBlogPosts(data ?? [])
       } catch (error) {
         console.error('Error fetching blog posts:', error)
       } finally {
         setLoading(false)
       }
     }
-
     fetchBlogPosts()
-  }, [])
+  }, [initialPosts])
 
   return (
     <section

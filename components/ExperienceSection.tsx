@@ -17,23 +17,39 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    title: "Technical Consultant",
+    company: "Freelance",
+    period: "Sep 2025 - Present",
+    description:
+      "Building AI-powered SaaS products and providing specialized consulting services. Leveraging advanced AI coding assistants to architect and ship full-stack applications rapidly while collaborating with innovative companies on strategic initiatives. Combining enterprise-grade AI expertise with vibe coding methodology—using Cursor IDE and Claude Code to iterate rapidly from data processing to production deployment.",
+    details: [
+      "Developing location-based business directory SaaS with SEO optimization and automated data enrichment",
+      "Creating content distribution platforms with YouTube integration and automated publishing workflows",
+      "Building AI research agents and automation tools for developer productivity",
+      "Business Intelligence implementation and optimization; AI workflow automation and multi-agent system architecture",
+      "Context engineering for enterprise AI solutions; full-stack development with AI-assisted workflows",
+    ],
+    technologies: ["AI/GenAI", "SaaS", "Cursor IDE", "Full-Stack", "Business Intelligence", "Context Engineering", "LangGraph", "SEO"],
+  },
+  {
     title: "Technical Services Engineer",
     company: "Doctolib",
-    period: "Jul 2024 - today",
+    period: "Jul 2024 - Aug 2025",
     description:
-      "I work as an engineer in a second-layer support team, where I troubleshoot complex product issues, provide integration solutions to customers, and identify bugs while collaborating closely with developers to resolve them. I handle knowledge management, bug prioritization, and internal escalations. I enhance our support workflows by leveraging AI systems and context engineering techniques.",
+      "Technical Services Engineer and AI Champion for Germany, providing second-line support for complex product and infrastructure issues while consistently achieving NPS and CSAT targets. Led AI initiatives and GenAI developments across the German Technical Services team. Developed AI-Enhanced Onboarding system with 4 interconnected AI agents in GDPR compliance. Represented Doctolib Germany at Dust AI Agents Hackathon in Paris (April 2025).",
     details: [
-      "Investigating and resolving complex technical issues",
-      "Providing comprehensive product guidance to clients",
-      "Developing and maintaining support documentation",
-      "Collaborating with development teams for product improvements",
+      "Led AI initiatives and project management for GenAI developments across German Technical Services team",
+      "Developed AI-Enhanced Onboarding system with 4 interconnected AI agents in GDPR compliance",
+      "Implemented context engineering solutions to reduce ticket handling times and optimize escalation processes",
+      "Represented Doctolib Germany at Dust AI Agents Hackathon in Paris (April 2025)",
+      "Collaborated closely with development teams using Jira, Confluence; monitoring via Sentry and Datadog",
     ],
-    technologies: ["SQL", "JavaScript", "Troubleshooting", "Jira", "Asana", "Context Engineering","GenAI", "LLMs"],
+    technologies: ["SQL", "JavaScript", "Troubleshooting", "Jira", "Context Engineering", "GenAI", "LLMs", "GDPR"],
   },
   {
     title: "Onboarding Buddy AI Agent Developer",
     company: "Doctolib",
-    period: "Apr 2025 - today",
+    period: "Apr 2025 - May 2025",
     description:
       "Designed and implemented the Onboarding Buddy, an AI-driven assistant powered by Dust (dust.tt), to automate employee onboarding at Doctolib. The system uses 4 interconnected AI agents (HR Buddy, IT Helper, Culture Ambassador, Job-Specific Guide) to provide seamless guidance on HR policies, IT setup, company culture, and role-specific training. Inspired by participation in the first Dust AI Agents Hackathon (Paris, April 11, 2025), the project enhances onboarding efficiency while ensuring GDPR and HIPAA compliance.",
     details: [ 
