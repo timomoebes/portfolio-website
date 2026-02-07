@@ -2,11 +2,11 @@ import { motion } from "framer-motion"
 
 const education = [
   {
-    title: "Databases and SQL for data processing with Python",
-    institution: "IBM",
-    status: "In Progress",
+    title: "Metabase Training - Explorer & Creator",
+    institution: "Metabase",
+    date: "03/2025",
     description:
-      "Learning to create relational databases, construct SQL queries, and work with advanced SQL techniques.",
+      "Demonstrates advanced proficiency in Metabase for data exploration, dashboard creation, and effective data storytelling.",
   },
   {
     title: "Google Prompting Essentials",

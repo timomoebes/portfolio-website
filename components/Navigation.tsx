@@ -77,7 +77,7 @@ export default function Navigation() {
             `}
           >
             <div className={`font-semibold text-lg ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-              Portfolio
+              Timo Möbes' Portfolio
             </div>
             
             <div className="flex items-center gap-3">
