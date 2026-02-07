@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Timo Möbes - AI Developer & Software Engineer',
+    default: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
     template: '%s | Timo Möbes Portfolio'
   },
   description: 'Timo Möbes - AI Developer, Software Engineer, and Healthcare Technology Specialist. Explore my portfolio showcasing AI research agents, IoT projects, and modern web applications.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://your-domain.com',
-    title: 'Timo Möbes - AI Developer & Software Engineer',
+    title: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
     description: 'AI Developer, Software Engineer, and Healthcare Technology Specialist. Explore my portfolio showcasing AI research agents, IoT projects, and modern web applications.',
     siteName: 'Timo Möbes Portfolio',
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Timo Möbes - AI Developer & Software Engineer',
+    title: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
     description: 'AI Developer, Software Engineer, and Healthcare Technology Specialist.',
     images: ['/og-default.jpg'],
     creator: '@your_twitter_handle',

@@ -7,6 +7,7 @@ All notable changes and new features to the portfolio codebase are documented he
 ## [Unreleased]
 
 ### Changed
+- **Site metadata**: Page title set to "Timo Möbes - AI-First SaaS Builder & Technical Consultant" (browser tab, Open Graph, Twitter).
 - **Navigation**: Mobile nav bar label set to "Timo Möbes' Portfolio" instead of "Portfolio".
 - **Education section**: Removed "Databases and SQL for data processing with Python" (IBM, In Progress). Added Metabase Training - Explorer (Level 2) & Creator (Level 3) certification (Metabase, Mar 2025) with description.
 - **Experience section**: Renamed "Freelancer & Technical Consultant" to "Technical Consultant" (company remains "Freelance").
