@@ -7,6 +7,12 @@ import Link from "next/link"
 
 const projects = [
   {
+    title: "Gym Directory SaaS - Cyprus",
+    tech: "Web scraping, data enrichment, SEO, full-stack, Vercel, AI-assisted development",
+    description:
+      "Location-based business directory platform connecting fitness enthusiasts with gyms across Cyprus. Built using AI-assisted development workflows to rapidly progress from web scraping and data enrichment to production-ready platform with SEO-optimized content. Automated data collection and enrichment pipelines, SEO copywriting and keyword optimization for local search, featured listings monetization model, and full-stack development with modern deployment on Vercel. Demonstrates end-to-end SaaS development: market research, data processing, web development, SEO strategy, and business model design—all shipped using vibe coding approach.",
+  },
+  {
     title: "Simplify Yourself - Website Remake",
     tech: "HTML5, CSS3, JavaScript, Three.js, Progressive Web App (PWA), Git",
     websiteUrl: "https://simplify-yourself.com",
