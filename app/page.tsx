@@ -12,6 +12,7 @@ const ExperienceSection = dynamic(() => import("@/components/ExperienceSection")
 const SkillsSection = dynamic(() => import("@/components/SkillsSection"))
 const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"))
 const OperatingPrinciplesSection = dynamic(() => import("@/components/OperatingPrinciplesSection"))
+const BookingCTASection = dynamic(() => import("@/components/BookingCTASection"))
 const EducationSection = dynamic(() => import("@/components/EducationSection"))
 const Footer = dynamic(() => import("@/components/Footer"))
 const BackToTop = dynamic(() => import("@/components/BackToTop"))
@@ -31,6 +32,7 @@ export default function Home() {
             <SkillsSection id="skills" />
             <ProjectsSection id="projects" />
             <OperatingPrinciplesSection id="principles" />
+            <BookingCTASection id="booking" />
             <EducationSection id="education" />
           </motion.div>
         </div>

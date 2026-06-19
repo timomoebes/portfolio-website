@@ -1,48 +1,29 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { ExternalLink, Send, Sparkles, X } from "lucide-react"
 import { useTheme } from "./ThemeProvider"
-import { X } from "lucide-react"
+
+type Source = {
+  id: string
+  title: string
+  type: string
+  url?: string
+}
+
+type AgentCta = {
+  label: string
+  href: string
+}
 
 interface Message {
   text: string
   isUser: boolean
+  sources?: Source[]
+  cta?: AgentCta
 }
-
-interface QnA {
-  question: string
-  answer: string
-}
-
-const preloadedQnA: QnA[] = [
-  {
-    question: "What are your main areas of expertise?",
-    answer:
-      "My main areas of expertise include software development, technical support, and IT infrastructure management. I'm particularly skilled in languages like Python, C++, and JavaScript, and have experience with cloud platforms like AWS.",
-  },
-  {
-    question: "Can you tell me about your most challenging project?",
-    answer:
-      "One of my most challenging projects was developing a mobile ECG monitoring device. It required integrating complex hardware with software, ensuring real-time data processing, and maintaining high accuracy.",
-  },
-  {
-    question: "How do you stay updated with the latest technologies?",
-    answer:
-      "I stay updated through online courses, tech blogs, webinars, and participating in coding challenges. I'm also part of several developer communities where we discuss emerging technologies.",
-  },
-  {
-    question: "What's your approach to problem-solving?",
-    answer:
-      "My approach involves breaking down complex issues into manageable parts, gathering information, and systematically testing solutions. I believe in collaborating with team members and leveraging collective knowledge.",
-  },
-  {
-    question: "How do you handle working in a team?",
-    answer:
-      "I thrive in team environments. I believe in open communication, respecting diverse perspectives, and contributing to a positive team culture. I'm comfortable both leading projects and supporting others.",
-  },
-]
 
 interface ChatbotProps {
   initialMessage?: string | null
@@ -50,20 +31,43 @@ interface ChatbotProps {
   onClose: () => void
 }
 
+const starterActions = [
+  {
+    label: "Proof",
+    prompt: "What has Timo actually built, and what is the strongest proof?",
+  },
+  {
+    label: "Workflow audit",
+    prompt:
+      "I run a service business and lose leads across WhatsApp, email, and LinkedIn. What would Timo automate first?",
+  },
+  {
+    label: "Technical depth",
+    prompt: "What makes Timo's AI work more than a toy chatbot?",
+  },
+]
+
+const defaultFollowUps = [
+  "Why is Gym Near Me Cyprus relevant proof?",
+  "How does OpenClaw connect to this portfolio?",
+  "What workflow should not be automated yet?",
+]
+
 export default function Chatbot({ initialMessage, showChatbot, onClose }: ChatbotProps) {
   const { theme } = useTheme()
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hi there! I'm Timo's virtual assistant. Feel free to ask me anything about Timo's experience, skills, or projects!",
+      text: "Ask me about Timo's projects, AI workflow work, OpenClaw, Gym Near Me, or describe a messy workflow and I’ll suggest the first automation worth building.",
       isUser: false,
     },
   ])
   const [input, setInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [followUps, setFollowUps] = useState(defaultFollowUps)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatboxRef = useRef<HTMLDivElement>(null)
-  const [suggestedQuestions, setSuggestedQuestions] = useState<QnA[]>([])
+  const handledInitialMessage = useRef<string | null>(null)
 
-  // Handle click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (chatboxRef.current && !chatboxRef.current.contains(event.target as Node)) {
@@ -78,173 +82,233 @@ export default function Chatbot({ initialMessage, showChatbot, onClose }: Chatbo
   }, [showChatbot, onClose])
 
   useEffect(() => {
-    if (showChatbot) {
-      setSuggestedQuestions(getRandomQuestions(3))
-    }
-  }, [showChatbot])
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages, isLoading])
 
   useEffect(() => {
-    if (initialMessage) {
-      handleQuery(initialMessage)
+    if (initialMessage && handledInitialMessage.current !== initialMessage) {
+      handledInitialMessage.current = initialMessage
+      void handleQuery(initialMessage)
     }
   }, [initialMessage])
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+  const handleQuery = async (query: string) => {
+    const cleanQuery = query.trim()
+    if (!cleanQuery || isLoading) return
 
-  useEffect(scrollToBottom, []) //Corrected dependency array
+    const nextMessages = [...messages, { text: cleanQuery, isUser: true }]
+    setMessages(nextMessages)
+    setInput("")
+    setIsLoading(true)
 
-  const getRandomQuestions = (count: number) => {
-    const shuffled = [...preloadedQnA].sort(() => 0.5 - Math.random())
-    return shuffled.slice(0, count)
-  }
+    try {
+      const response = await fetch("/api/portfolio-agent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: cleanQuery, history: messages }),
+      })
 
-  const handleQuery = (query: string) => {
-    const matchedQnA = preloadedQnA.find((qa) => qa.question.toLowerCase() === query.toLowerCase())
+      const data = await response.json()
 
-    if (matchedQnA) {
-      setMessages((prev) => [...prev, { text: query, isUser: true }, { text: matchedQnA.answer, isUser: false }])
-    } else {
+      if (!response.ok && !data?.answer) {
+        throw new Error(data?.error || "Agent request failed")
+      }
+
       setMessages((prev) => [
         ...prev,
-        { text: query, isUser: true },
         {
-          text: "I'm sorry, I don't have a specific answer for that question. Is there anything else I can help you with?",
+          text: data.answer,
           isUser: false,
+          sources: data.sources || [],
+          cta: data.cta,
         },
       ])
+
+      if (Array.isArray(data.suggestedNextQuestions) && data.suggestedNextQuestions.length > 0) {
+        setFollowUps(data.suggestedNextQuestions.slice(0, 3))
+      }
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          text: "The live portfolio agent hit a temporary error. Try again, or ask about OpenClaw, Gym Near Me Cyprus, Doctolib, or a messy workflow you want to automate.",
+          isUser: false,
+          cta: { label: "Work with me through OpenClaw", href: "https://www.openclawconsulting.online/" },
+        },
+      ])
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (input.trim()) {
-      handleQuery(input)
-      setInput("")
-    }
+  const handleSend = (event: React.FormEvent) => {
+    event.preventDefault()
+    void handleQuery(input)
   }
+
+  const isDark = theme === "dark"
 
   return (
     <div
       ref={chatboxRef}
-      className={`
-        w-full h-auto max-h-[85vh] rounded-lg shadow-lg flex flex-col
-        ${theme === "dark" ? "bg-gray-900 border border-gray-800" : "bg-white border border-gray-200"}
-      `}
+      className={`w-full max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden ${
+        isDark ? "bg-slate-950/95 border border-white/15" : "bg-white border border-slate-200"
+      }`}
     >
-      {/* Header */}
-      <div
-        className={`
-          px-4 py-3 border-b flex items-center justify-between
-          ${theme === "dark" ? "border-gray-800" : "border-gray-200"}
-        `}
-      >
-        <h3 className={`font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-          Chat with Timo's Assistant
-        </h3>
+      <div className={`px-4 py-3 border-b flex items-start justify-between gap-3 ${isDark ? "border-white/10" : "border-slate-200"}`}>
+        <div>
+          <div className="flex items-center gap-2">
+            <Sparkles className={isDark ? "w-4 h-4 text-blue-300" : "w-4 h-4 text-blue-600"} />
+            <h3 className={`font-bold ${isDark ? "text-white" : "text-slate-950"}`}>Ask Timo's Portfolio Agent</h3>
+          </div>
+          <p className={`text-xs mt-1 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+            Grounded in portfolio context. Do not paste secrets or private data.
+          </p>
+        </div>
         <button
           onClick={onClose}
-          className={`
-            p-1 rounded-full transition-colors
-            ${theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-100"}
-          `}
+          className={`p-1 rounded-full transition-colors ${isDark ? "hover:bg-white/10" : "hover:bg-slate-100"}`}
           aria-label="Close chat"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Messages */}
       <div className="flex-grow overflow-auto p-4 space-y-4">
         <AnimatePresence initial={false}>
           {messages.map((message, index) => (
             <motion.div
-              key={index}
+              key={`${message.text}-${index}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`
-                  max-w-[85%] p-3 rounded-lg
-                  ${
-                    message.isUser
-                      ? "bg-blue-600 text-white"
-                      : theme === "dark"
-                        ? "bg-gray-800 text-gray-200"
-                        : "bg-gray-100 text-gray-900"
-                  }
-                `}
+                className={`max-w-[88%] p-3 rounded-2xl ${
+                  message.isUser
+                    ? "bg-blue-600 text-white"
+                    : isDark
+                      ? "bg-white/10 text-slate-100 border border-white/10"
+                      : "bg-slate-100 text-slate-900"
+                }`}
               >
-                <p className="text-sm">{message.text}</p>
+                <p className="text-sm whitespace-pre-wrap leading-relaxed">{message.text}</p>
+
+                {!message.isUser && message.sources && message.sources.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {message.sources.slice(0, 4).map((source) =>
+                      source.url ? (
+                        <a
+                          key={source.id}
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-medium ${
+                            isDark ? "bg-blue-400/15 text-blue-100 hover:bg-blue-400/25" : "bg-blue-50 text-blue-700 hover:bg-blue-100"
+                          }`}
+                        >
+                          {source.title}
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <span
+                          key={source.id}
+                          className={`inline-flex rounded-full px-2 py-1 text-[11px] font-medium ${
+                            isDark ? "bg-white/10 text-slate-200" : "bg-white text-slate-700"
+                          }`}
+                        >
+                          {source.title}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                )}
+
+                {!message.isUser && message.cta && (
+                  <a
+                    href={message.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-2 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                  >
+                    {message.cta.label}
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
+
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className={`rounded-2xl px-3 py-2 text-sm ${isDark ? "bg-white/10 text-slate-300" : "bg-slate-100 text-slate-600"}`}>
+              Reading portfolio context… mapping the practical answer…
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggested Questions */}
-      <div
-        className={`
-          px-4 py-2 border-t
-          ${theme === "dark" ? "border-gray-800" : "border-gray-200"}
-        `}
-      >
-        <p className={`text-xs mb-2 ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>Suggested questions:</p>
-        <div className="flex flex-wrap gap-1">
-          {suggestedQuestions.map((qa, index) => (
-            <button
-              key={index}
-              onClick={() => handleQuery(qa.question)}
-              className={`
-                text-xs px-2 py-1 rounded-full transition-colors
-                ${
-                  theme === "dark"
-                    ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }
-              `}
-            >
-              {qa.question}
-            </button>
-          ))}
+      <div className={`px-4 py-3 border-t space-y-3 ${isDark ? "border-white/10" : "border-slate-200"}`}>
+        <div>
+          <p className={`text-xs font-semibold mb-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>Try this:</p>
+          <div className="grid gap-2 sm:grid-cols-3">
+            {starterActions.map((action) => (
+              <button
+                key={action.label}
+                onClick={() => void handleQuery(action.prompt)}
+                disabled={isLoading}
+                className={`text-left text-xs px-3 py-2 rounded-xl transition-colors ${
+                  isDark ? "bg-white/10 text-slate-200 hover:bg-white/15" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                } disabled:opacity-50`}
+              >
+                {action.label}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {followUps.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {followUps.map((question) => (
+              <button
+                key={question}
+                onClick={() => void handleQuery(question)}
+                disabled={isLoading}
+                className={`text-xs px-2 py-1 rounded-full transition-colors ${
+                  isDark ? "bg-slate-800 text-slate-300 hover:bg-slate-700" : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
+                } disabled:opacity-50`}
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Input */}
-      <form onSubmit={handleSend} className="p-4 border-t border-gray-200 dark:border-gray-800">
+      <form onSubmit={handleSend} className={`p-4 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
         <div className="flex gap-2">
           <input
             type="text"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className={`
-              flex-grow px-3 py-2 text-sm rounded-lg transition-colors
-              ${
-                theme === "dark"
-                  ? "bg-gray-800 text-white placeholder-gray-400 focus:bg-gray-700"
-                  : "bg-gray-100 text-gray-900 placeholder-gray-500 focus:bg-gray-50"
-              }
-              focus:outline-none focus:ring-2 focus:ring-blue-500
-            `}
+            onChange={(event) => setInput(event.target.value)}
+            placeholder="Ask about Timo, or describe a messy workflow..."
+            maxLength={1200}
+            className={`flex-grow min-w-0 px-3 py-2 text-sm rounded-xl transition-colors ${
+              isDark
+                ? "bg-white/10 text-white placeholder-slate-400 focus:bg-white/15"
+                : "bg-slate-100 text-slate-900 placeholder-slate-500 focus:bg-slate-50"
+            } focus:outline-none focus:ring-2 focus:ring-blue-500`}
           />
           <button
             type="submit"
-            disabled={!input.trim()}
-            className={`
-              px-4 py-2 rounded-lg text-sm font-medium transition-colors
-              ${
-                input.trim()
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
-              }
-            `}
+            disabled={!input.trim() || isLoading}
+            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+            aria-label="Send message"
           >
-            Send
+            <Send className="w-4 h-4" />
           </button>
         </div>
       </form>
