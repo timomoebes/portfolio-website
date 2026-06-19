@@ -6,7 +6,7 @@ import { useTheme } from "./ThemeProvider"
 const primaryExperience = [
   {
     title: "Technical Consultant",
-    company: "Freelance / OpenClaw direction",
+    company: "Self-employed / OpenClaw direction",
     period: "2025 - Present",
     description: "Building AI-powered SaaS products and practical consulting systems: workflow audits, implementation scopes, CRM enrichment, lead handling, reporting loops, and approval-gated automation.",
     tags: ["AI workflows", "SaaS", "CRM", "Reporting", "Next.js", "Automation"],
