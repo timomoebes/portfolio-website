@@ -151,7 +151,7 @@ export default function Chatbot({ initialMessage, showChatbot, onClose }: Chatbo
   return (
     <div
       ref={chatboxRef}
-      className={`w-full max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden ${
+      className={`w-full max-h-[min(82dvh,720px)] rounded-2xl shadow-2xl flex flex-col overflow-hidden ${
         isDark ? "bg-slate-950/95 border border-white/15" : "bg-white border border-slate-200"
       }`}
     >
@@ -288,15 +288,15 @@ export default function Chatbot({ initialMessage, showChatbot, onClose }: Chatbo
         )}
       </div>
 
-      <form onSubmit={handleSend} className={`p-4 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
-        <div className="flex gap-2">
+      <form onSubmit={handleSend} className={`p-3 sm:p-4 border-t ${isDark ? "border-white/10" : "border-slate-200"}`}>
+        <div className="flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
             placeholder="Ask about Timo, or describe a messy workflow..."
             maxLength={1200}
-            className={`flex-grow min-w-0 px-3 py-2 text-sm rounded-xl transition-colors ${
+            className={`h-11 flex-grow min-w-0 px-3 py-2 text-sm rounded-xl transition-colors ${
               isDark
                 ? "bg-white/10 text-white placeholder-slate-400 focus:bg-white/15"
                 : "bg-slate-100 text-slate-900 placeholder-slate-500 focus:bg-slate-50"
@@ -305,7 +305,7 @@ export default function Chatbot({ initialMessage, showChatbot, onClose }: Chatbo
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-sm font-semibold text-white shadow-lg shadow-blue-950/20 transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

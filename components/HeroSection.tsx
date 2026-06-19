@@ -142,7 +142,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className={`fixed bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 z-50 transition-opacity duration-200 ${showChatbot ? "pointer-events-none opacity-0 md:pointer-events-auto md:opacity-100" : "opacity-100"}`}>
         <motion.button
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
@@ -161,7 +161,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-4 z-40 inset-x-4 max-w-sm mx-auto md:bottom-24 md:right-4 md:inset-x-auto md:w-80 md:mx-0"
+            className="fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] z-[60] inset-x-3 max-w-sm mx-auto md:bottom-24 md:right-4 md:inset-x-auto md:w-80 md:mx-0"
           >
             <Chatbot initialMessage={chatQuery} showChatbot={showChatbot} onClose={() => setShowChatbot(false)} />
           </motion.div>
