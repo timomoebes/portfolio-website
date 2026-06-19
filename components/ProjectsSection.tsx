@@ -2,155 +2,92 @@
 
 import { motion } from "framer-motion"
 import { useTheme } from "./ThemeProvider"
-import { Github, ExternalLink } from "lucide-react"
+import { ExternalLink, Github } from "lucide-react"
 import Link from "next/link"
 
-const projects = [
+const featuredProjects = [
   {
     title: "OpenClaw Consulting",
-    tech: "AI workflow audit, OpenClaw implementation, human-approved automation, agentic operations",
-    websiteUrl: "https://www.openclawconsulting.online/",
-    description:
-      "Current consulting venture for AI workflow audit and OpenClaw implementation consulting. Helps founder-led businesses diagnose the workflow worth fixing first, then build practical human-approved automation around lead handling, CRM enrichment, post-call execution, reporting loops, and internal operations.",
+    label: "AI workflow audit and implementation system",
+    url: "https://www.openclawconsulting.online/",
+    problem: "Founder-led businesses have messy workflows, unclear automation priorities, and no evidence loop for what should be fixed first.",
+    built: "Audit-to-implementation spine with human-approved automation around lead handling, CRM enrichment, post-call execution, reporting loops, and internal operations.",
+    proof: "Shows the consulting operating model behind my current work: diagnose first, scope tightly, build practical systems, keep approval gates where they matter.",
   },
   {
-    title: "Gym Directory SaaS - Cyprus",
-    tech: "Web scraping, data enrichment, SEO, full-stack, Vercel, AI-assisted development",
-    description:
-      "Location-based business directory platform connecting fitness enthusiasts with gyms across Cyprus. Built using AI-assisted development workflows to rapidly progress from web scraping and data enrichment to production-ready platform with SEO-optimized content. Automated data collection and enrichment pipelines, SEO copywriting and keyword optimization for local search, featured listings monetization model, and full-stack development with modern deployment on Vercel. Demonstrates end-to-end SaaS development: market research, data processing, web development, SEO strategy, and business model design—all shipped using vibe coding approach.",
-  },
-  {
-    title: "Simplify Yourself - Website Remake",
-    tech: "HTML5, CSS3, JavaScript, Three.js, Progressive Web App (PWA), Git",
-    websiteUrl: "https://simplify-yourself.com",
-    description:
-      "Transformed a dated WordPress minimalism blog into a modern, fast, and responsive web experience featuring dynamic content loading and interactive 3D visual effects. Implemented responsive design with modern UI/UX principles, interactive Three.js hero animations, and dynamic blog post loading with search functionality. Created PWA capabilities for offline access, custom favicon system with brand identity, and optimized performance with SEO improvements. The remake focuses on clean, intentional design that reflects minimalist philosophy while providing an engaging user experience across all devices.",
+    title: "Gym Near Me Cyprus",
+    label: "AI-assisted local directory SaaS",
+    url: "https://gymnearme.cy/",
+    problem: "Local gym discovery in Cyprus is fragmented, search intent is underserved, and monetization needs a clean directory structure.",
+    built: "Business data enrichment, SEO content structure, full-stack directory deployment, local search pages, and featured-listing monetization logic.",
+    proof: "Shows end-to-end product thinking: market research, data processing, web development, SEO, monetization, and deployment.",
   },
   {
     title: "AI Research Agent",
-    tech: "Python, LangGraph, OpenAI GPT-4, Firecrawl, Pydantic, REST APIs",
-    githubUrl: "https://github.com/timomoebes/ai-research-agent-langgraph",
-    description:
-      "Developed an intelligent AI research agent that automatically discovers, analyzes, and compares developer tools and technologies through advanced web scraping and LLM-powered analysis. Built with a sophisticated multi-step workflow using LangGraph orchestration, featuring structured data extraction with Pydantic models, comprehensive web content analysis via Firecrawl API, and intelligent recommendation generation. The system demonstrates expertise in AI agent architecture, workflow automation, and enterprise-grade data processing pipelines with both simple CLI interfaces and advanced research capabilities.",
+    label: "Agentic research workflow",
+    github: "https://github.com/timomoebes/ai-research-agent-langgraph",
+    problem: "Research across tools and sources gets slow, inconsistent, and hard to compare when the workflow is manual.",
+    built: "LangGraph/OpenAI/Firecrawl/Pydantic workflow for discovery, scraping, structured extraction, comparison, and recommendation output.",
+    proof: "Shows agent architecture, structured data flow, and useful automation beyond a toy chatbot.",
   },
-  {
-    title: "Interactive Portfolio Website",
-    tech: "TypeScript, Next.js, React, Tailwind CSS, Framer Motion, Three.js, GenAI",
-    description:
-      "Developed a modern portfolio website featuring interactive 3D backgrounds, AI-powered chatbot, and innovative 2D-to-3D object generation technology. Implemented responsive design with dark mode support, smooth animations, and interactive project showcases. The site demonstrates expertise in modern web technologies and AI integration.",
-  },
-  {
-    title: "Mobile Long Term ECG Monitoring Device",
-    tech: "C / C++, ESP32, WiFi, MQTT, Autodesk Fusion 360, 3D printing",
-    description:
-      "Engineered a sophisticated mobile ECG monitoring solution combining hardware and software expertise. Implemented real-time data processing and wireless transmission using ESP32 and MQTT protocol. Utilized Agile methodology with Jira and Trello for project management. Created custom enclosure designs using Autodesk Fusion 360 and manufactured through 3D printing, demonstrating full-stack product development capabilities.",
-  },
-  {
-    title: "Microcontroller System for Blood Pressure Measurement",
-    tech: "C / C++, Arduino Mega 2560, Bluetooth",
-    description:
-      "Designed and implemented a comprehensive health monitoring system centered around blood pressure measurement. Developed an intuitive touchscreen interface for user interaction, integrated multiple sensor types including temperature and blood pressure sensors, and implemented Bluetooth connectivity for data transmission. The system provides accurate health metrics while maintaining user-friendly operation.",
-  },
-  {
-    title: "3D Printer Monitoring and Control System",
-    tech: "Raspberry Pi, OctoPrint, Linux",
-    description:
-      "Created a sophisticated 3D printer monitoring solution using Raspberry Pi and OctoPrint. Implemented remote control capabilities for print job management, integrated Pi camera for real-time visual monitoring, and developed custom safety measures including temperature monitoring and emergency shutdown procedures. The system enables efficient remote operation while ensuring safe and reliable 3D printing.",
-  },
-  {
-    title: "Shopping System",
-    tech: "C++",
-    githubUrl: "https://github.com/timomoebes/SupermarketApp",
-    description:
-      "Developed a comprehensive supermarket management system showcasing object-oriented programming principles. Implemented features including inventory management, user authentication, shopping cart functionality, and persistent data storage. The console application demonstrates proficiency in C++ fundamentals, file I/O operations, and creating maintainable, structured code.",
-  },
-  {
-    title: "PDF to MP3 Converter",
-    tech: "Python",
-    githubUrl: "https://github.com/timomoebes/Pdf2Audio",
-    description:
-      "Created an efficient document accessibility tool that converts PDF documents into audio format. Utilized PyPDF2 for robust PDF text extraction and pyttsx3 for high-quality text-to-speech conversion. The application supports various PDF formats and provides customizable voice output options, making written content accessible to visually impaired users or for convenient audio consumption.",
-  },
-  {
-    title: "CAD 3D Design: Filament Holder for Desktop 3D Printer",
-    tech: "Creo",
-    description: "Designed a filament holder for Monoprice select mini desktop 3D printer using Creo software.",
-  },
-  {
-    title: "Digital Clock Design",
-    tech: "Logisim, MultiSIM",
-    description:
-      "Developed a digital clock with integrated circuits (ICs). Prototyped in MultiSIM and final installation on a breadboard. Studied logic gates and arithmetic elements, including 7 segment displays, counter, multiplexer, and more.",
-  },
-  {
-    title: "Smart Contract on Ethereum Blockchain",
-    tech: "Solidity, Ethereum",
-    githubUrl: "https://github.com/timomoebes/my-first-own-cryptocurrency",
-    description:
-      "Developed a smart contract on the Ethereum Blockchain using the Solidity programming language, demonstrating practical experience in blockchain development.",
-  },
+]
+
+const supportingProjects = [
+  "Simplify Yourself website remake — modern responsive rebuild, PWA work, Three.js interactions, SEO/performance cleanup.",
+  "Interactive portfolio — Next.js, TypeScript, Tailwind, Framer Motion, 3D background, chatbot integration.",
+  "ECG and blood-pressure monitoring projects — embedded systems, microcontrollers, sensors, wireless data, hardware/software integration.",
+  "3D printer monitoring — Raspberry Pi, OctoPrint, remote monitoring, Linux, safety logic.",
+  "PDF to MP3 converter — Python accessibility utility for turning documents into audio.",
 ]
 
 export default function ProjectsSection({ id }: { id?: string }) {
   const { theme } = useTheme()
+  const isDark = theme === "dark"
 
   return (
-    <section
-      id={id}
-      className={`py-16 min-h-screen flex items-center justify-center ${
-        theme === "dark" ? "bg-gradient-to-br from-yellow-900 to-red-900" : "bg-gradient-to-br from-yellow-50 to-red-50"
-      }`}
-    >
-      <div className="container mx-auto px-4 py-16">
-        <h2 className={`text-4xl font-bold mb-12 text-center ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-          Projects
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
+    <section id={id} className={`py-24 flex items-center justify-center ${isDark ? "bg-gradient-to-br from-yellow-950 to-red-950" : "bg-gradient-to-br from-yellow-50 to-red-50"}`}>
+      <div className="container mx-auto px-5 sm:px-8">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <p className={`text-sm font-semibold uppercase tracking-[0.25em] mb-4 ${isDark ? "text-amber-200" : "text-amber-700"}`}>Featured proof</p>
+          <h2 className={`text-3xl sm:text-5xl font-black mb-5 ${isDark ? "text-white" : "text-slate-950"}`}>Projects that explain the current direction.</h2>
+          <p className={`text-lg leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+            The point is not a long gallery. These are the strongest signals for AI workflow consulting, product shipping, and operational implementation.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6 mb-10">
+          {featuredProjects.map((project, index) => (
+            <motion.article
+              key={project.title}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] ${
-                theme === "dark" ? "bg-white/10 hover:bg-white/[0.15]" : "bg-white hover:bg-gray-50"
-              }`}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className={`rounded-2xl border p-6 flex flex-col ${isDark ? "border-white/15 bg-white/10" : "border-slate-200 bg-white shadow-sm"}`}
             >
-              <div className="flex justify-between items-start mb-2">
-                <h3 className={`text-2xl font-semibold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
-                  {project.title}
-                </h3>
-                <div className="flex gap-2">
-                  {project.websiteUrl && (
-                    <Link
-                      href={project.websiteUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-2 rounded-full transition-colors ${
-                        theme === "dark" ? "hover:bg-white/10" : "hover:bg-gray-100"
-                      }`}
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </Link>
-                  )}
-                  {project.githubUrl && (
-                    <Link
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-2 rounded-full transition-colors ${
-                        theme === "dark" ? "hover:bg-white/10" : "hover:bg-gray-100"
-                      }`}
-                    >
-                      <Github className="w-5 h-5" />
-                    </Link>
-                  )}
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 className={`text-2xl font-bold mb-2 ${isDark ? "text-white" : "text-slate-950"}`}>{project.title}</h3>
+                  <p className={`font-semibold ${isDark ? "text-amber-200" : "text-amber-700"}`}>{project.label}</p>
                 </div>
+                {project.url && <Link href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title}`} className="p-2 rounded-full hover:bg-white/10"><ExternalLink className="w-5 h-5" /></Link>}
+                {project.github && <Link href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} GitHub repository`} className="p-2 rounded-full hover:bg-white/10"><Github className="w-5 h-5" /></Link>}
               </div>
-              <p className={`text-sm mb-4 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{project.tech}</p>
-              <p className={theme === "dark" ? "text-gray-400" : "text-gray-700"}>{project.description}</p>
-            </motion.div>
+              <div className="space-y-4 flex-1">
+                <div><p className="text-xs font-bold uppercase tracking-widest opacity-70 mb-1">Problem</p><p className={isDark ? "text-slate-300" : "text-slate-700"}>{project.problem}</p></div>
+                <div><p className="text-xs font-bold uppercase tracking-widest opacity-70 mb-1">Built</p><p className={isDark ? "text-slate-300" : "text-slate-700"}>{project.built}</p></div>
+                <div><p className="text-xs font-bold uppercase tracking-widest opacity-70 mb-1">Proof value</p><p className={isDark ? "text-slate-300" : "text-slate-700"}>{project.proof}</p></div>
+              </div>
+            </motion.article>
           ))}
+        </div>
+
+        <div className={`rounded-2xl border p-6 ${isDark ? "border-white/15 bg-black/20" : "border-slate-200 bg-white/80"}`}>
+          <h3 className={`text-2xl font-bold mb-5 ${isDark ? "text-white" : "text-slate-950"}`}>Supporting project history</h3>
+          <div className="grid md:grid-cols-2 gap-4">
+            {supportingProjects.map((project) => (
+              <p key={project} className={`leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project}</p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

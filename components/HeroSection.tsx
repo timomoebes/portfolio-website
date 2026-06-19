@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin } from "lucide-react"
+import { ArrowRight, ExternalLink, Github, Linkedin } from "lucide-react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Canvas } from "@react-three/fiber"
@@ -14,6 +14,13 @@ interface HeroSectionProps {
   chatQuery?: string | null
 }
 
+const proofSignals = [
+  "OpenClaw Consulting",
+  "Gym Near Me Cyprus",
+  "Doctolib AI Champion",
+  "GDPR-aware agent workflows",
+]
+
 export default function HeroSection({ chatQuery }: HeroSectionProps) {
   const { theme } = useTheme()
   const [showChatbot, setShowChatbot] = useState(false)
@@ -24,15 +31,13 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
     }
   }, [chatQuery])
 
-  return (
-    <section id="hero" className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Background Color */}
-      <div
-        className={`absolute inset-0 ${theme === "dark" ? "bg-gradient-to-b from-blue-950 to-black" : "bg-gradient-to-b from-blue-100 to-white"}`}
-      />
+  const isDark = theme === "dark"
 
-      {/* Animated 3D Background */}
-      <div className="absolute inset-0">
+  return (
+    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden pt-28 pb-16">
+      <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-b from-slate-950 via-blue-950 to-black" : "bg-gradient-to-b from-blue-100 via-white to-slate-100"}`} />
+
+      <div className="absolute inset-0 opacity-80">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <Suspense fallback={null}>
             <AnimatedBackground />
@@ -40,83 +45,115 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
         </Canvas>
       </div>
 
-      {/* Main Text Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center md:flex-row md:items-start md:justify-between">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center md:text-left md:max-w-2xl w-full"
-        >
-          <h1
-            className={`text-3xl sm:text-4xl md:text-6xl font-bold mb-4 ${theme === "dark" ? "text-white" : "text-gray-900"}`}
-          >
-            Timo Möbes
-          </h1>
-          <h2
-            className={`text-xl sm:text-2xl md:text-4xl font-semibold mb-6 ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}
-          >
-            AI-First SaaS Builder & Technical Consultant
-          </h2>
-          <p className={`text-lg md:text-xl mb-8 max-w-2xl ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>
-            Shipping Products at 10x Speed with Cursor & Claude
-          </p>
-
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
           <motion.div
-            className="flex justify-center md:justify-start gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
           >
-            <Link
-              href="https://github.com/timomoebes"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold shadow-md ${
-                theme === "dark"
-                  ? "bg-blue-600/60 text-white border border-blue-400 hover:bg-blue-600/80 hover:border-blue-300"
-                  : "bg-blue-500/60 text-white border border-blue-600 hover:bg-blue-500/80 hover:border-blue-700"
-              } transition-colors duration-200 focus:outline-none focus:ring-blue-300`}
-            >
-              <Github className="w-5 h-5" />
-              <span>GitHub</span>
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/timomoebes/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold shadow-md ${
-                theme === "dark"
-                  ? "bg-blue-600/60 text-white border border-blue-400 hover:bg-blue-600/80 hover:border-blue-300"
-                  : "bg-blue-500/60 text-white border border-blue-600 hover:bg-blue-500/80 hover:border-blue-700"
-              } transition-colors duration-200 focus:outline-none focus:ring-blue-300`}
-            >
-              <Linkedin className="w-5 h-5" />
-              <span>LinkedIn</span>
-            </Link>
+            <p className={`mb-5 text-sm sm:text-base font-semibold tracking-[0.25em] uppercase ${isDark ? "text-blue-200" : "text-blue-800"}`}>
+              Timo Möbes · AI Workflow Architect
+            </p>
+            <h1 className={`text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[0.95] mb-6 ${isDark ? "text-white" : "text-slate-950"}`}>
+              I build AI workflow systems that survive real operations.
+            </h1>
+            <p className={`text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-3xl mb-8 ${isDark ? "text-slate-200" : "text-slate-700"}`}>
+              I combine healthcare technology discipline, enterprise support experience, and AI-assisted product shipping to turn messy work into practical systems for consulting, CRM, reporting, lead handling, and SaaS experiments.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+              <Link
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-500 px-6 py-3 font-bold text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                See proof of work <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://www.openclawconsulting.online/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-bold transition border ${
+                  isDark
+                    ? "border-white/25 bg-white/10 text-white hover:bg-white/20"
+                    : "border-slate-300 bg-white/80 text-slate-900 hover:bg-white"
+                }`}
+              >
+                Work with me through OpenClaw <ExternalLink className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-2 mb-8" aria-label="Proof signals">
+              {proofSignals.map((signal) => (
+                <span
+                  key={signal}
+                  className={`rounded-full px-3 py-1 text-sm font-medium border ${
+                    isDark ? "border-white/15 bg-white/10 text-slate-200" : "border-slate-200 bg-white/80 text-slate-700"
+                  }`}
+                >
+                  {signal}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="https://github.com/timomoebes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${isDark ? "text-slate-200 hover:text-white" : "text-slate-700 hover:text-slate-950"}`}
+              >
+                <Github className="w-4 h-4" /> GitHub
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/timomoebes/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${isDark ? "text-slate-200 hover:text-white" : "text-slate-700 hover:text-slate-950"}`}
+              >
+                <Linkedin className="w-4 h-4" /> LinkedIn
+              </Link>
+            </div>
           </motion.div>
-        </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className={`rounded-3xl border p-6 sm:p-8 backdrop-blur-md ${isDark ? "border-white/15 bg-white/10 text-white" : "border-slate-200 bg-white/80 text-slate-900"}`}
+          >
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300 mb-4">What the portfolio proves</p>
+            <div className="space-y-5">
+              <div>
+                <h2 className="text-xl font-bold mb-1">AI implementation, not AI theatre</h2>
+                <p className={isDark ? "text-slate-300" : "text-slate-600"}>Workflow audits, agentic operations, human approval gates, and evidence-driven handoffs.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-1">Product shipping under real constraints</h2>
+                <p className={isDark ? "text-slate-300" : "text-slate-600"}>From local SaaS and SEO systems to consulting workflows, shipped fast and verified.</p>
+              </div>
+              <div>
+                <h2 className="text-xl font-bold mb-1">Healthcare-grade operational discipline</h2>
+                <p className={isDark ? "text-slate-300" : "text-slate-600"}>Technical services, regulated environments, GDPR-aware AI work, and clear escalation logic.</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* FIXED Character Icon */}
       <div className="fixed bottom-4 right-4 z-50">
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.94 }}
           className="p-0 bg-transparent rounded-full shadow-lg"
           onClick={() => setShowChatbot(!showChatbot)}
+          aria-label="Open Timo portfolio chat"
         >
-          <Image
-            src="/character.png"
-            alt="Chat with me"
-            width={80}
-            height={80}
-            className="object-contain"
-          />
+          <Image src="/character.png" alt="Timo portfolio chat assistant" width={80} height={80} className="object-contain" />
         </motion.button>
       </div>
 
-      {/* FIXED Chatbot */}
       <AnimatePresence>
         {showChatbot && (
           <motion.div

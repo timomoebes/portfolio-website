@@ -8,11 +8,12 @@ import remarkGfm from 'remark-gfm'
 import type { Metadata } from 'next'
 
 interface BlogPostPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
+    if (!supabase) return null
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
@@ -27,7 +28,8 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const blogPost = await getBlogPost(params.slug)
+  const { slug } = await params
+  const blogPost = await getBlogPost(slug)
   
   if (!blogPost) {
     return {
@@ -40,8 +42,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const description = blogPost.excerpt
   const publishedTime = new Date(blogPost.date).toISOString()
   const modifiedTime = new Date(blogPost.updated_at).toISOString()
-  const url = `https://your-domain.com/blog/${blogPost.slug}`
-  const imageUrl = blogPost.image_url || 'https://your-domain.com/og-default.jpg'
+  const url = `https://www.timomoebes.com/blog/${blogPost.slug}`
+  const imageUrl = blogPost.image_url || 'https://www.timomoebes.com/og-default.jpg'
 
   return {
     title,
@@ -74,7 +76,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title,
       description,
       images: [imageUrl],
-      creator: '@your_twitter_handle',
+
     },
     alternates: {
       canonical: url,
@@ -94,7 +96,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const blogPost = await getBlogPost(params.slug)
+  const { slug } = await params
+  const blogPost = await getBlogPost(slug)
   
   if (!blogPost) {
     notFound()
@@ -106,25 +109,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@type": "BlogPosting",
     "headline": blogPost.title,
     "description": blogPost.excerpt,
-    "image": blogPost.image_url || 'https://your-domain.com/og-default.jpg',
+    "image": blogPost.image_url || 'https://www.timomoebes.com/og-default.jpg',
     "author": {
       "@type": "Person",
       "name": "Timo Möbes",
-      "url": "https://your-domain.com"
+      "url": "https://www.timomoebes.com"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Timo Möbes Portfolio",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://your-domain.com/logo.png"
+        "url": "https://www.timomoebes.com/logo.png"
       }
     },
     "datePublished": new Date(blogPost.date).toISOString(),
     "dateModified": new Date(blogPost.updated_at).toISOString(),
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://your-domain.com/blog/${blogPost.slug}`
+      "@id": `https://www.timomoebes.com/blog/${blogPost.slug}`
     },
     "keywords": blogPost.tags?.join(', ') || blogPost.category,
     "articleSection": blogPost.category,
@@ -144,8 +147,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           {/* Back button */}
-          <Link 
-            href="/#blog" 
+          <Link
+            href="/#principles"
             className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-700 dark:text-indigo-300 dark:hover:text-indigo-200 mb-8 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -305,6 +308,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 }
 
 export async function generateStaticParams() {
+  if (!supabase) return []
+
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('slug')

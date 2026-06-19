@@ -11,15 +11,13 @@ const AboutSection = dynamic(() => import("@/components/AboutSection"))
 const ExperienceSection = dynamic(() => import("@/components/ExperienceSection"))
 const SkillsSection = dynamic(() => import("@/components/SkillsSection"))
 const ProjectsSection = dynamic(() => import("@/components/ProjectsSection"))
-const BlogSection = dynamic(() => import("@/components/BlogSection"))
+const OperatingPrinciplesSection = dynamic(() => import("@/components/OperatingPrinciplesSection"))
 const EducationSection = dynamic(() => import("@/components/EducationSection"))
 const Footer = dynamic(() => import("@/components/Footer"))
 const BackToTop = dynamic(() => import("@/components/BackToTop"))
 
 export default function Home() {
-  const [chatQuery, setChatQuery] = useState<string | null>(null)
-
-  // Web Vitals integration removed due to build errors; consider using Next.js metrics in future
+  const [chatQuery] = useState<string | null>(null)
 
   return (
     <ThemeProvider>
@@ -30,9 +28,9 @@ export default function Home() {
             <HeroSection chatQuery={chatQuery} />
             <AboutSection id="about" />
             <ExperienceSection id="experience" />
-            <SkillsSection id="skills" onChatQuery={setChatQuery} />
+            <SkillsSection id="skills" />
             <ProjectsSection id="projects" />
-            <BlogSection id="blog" />
+            <OperatingPrinciplesSection id="principles" />
             <EducationSection id="education" />
           </motion.div>
         </div>

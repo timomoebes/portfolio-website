@@ -1,47 +1,61 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next"
+import "./globals.css"
+
+const siteUrl = "https://www.timomoebes.com"
+const title = "Timo Möbes - AI Workflow Architect & Agent Builder"
+const description = "Timo Möbes builds AI workflow systems, SaaS experiments, and practical automation for consulting, CRM, reporting, lead handling, and operations — combining healthcare technology discipline with AI-assisted product shipping."
 
 export const metadata: Metadata = {
   title: {
-    default: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
-    template: '%s | Timo Möbes Portfolio'
+    default: title,
+    template: "%s | Timo Möbes Portfolio",
   },
-  description: 'Timo Möbes - AI Developer, Software Engineer, and Healthcare Technology Specialist. Explore my portfolio showcasing AI research agents, IoT projects, and modern web applications.',
-  keywords: ['Timo Möbes', 'AI Developer', 'Software Engineer', 'Healthcare Technology', 'Portfolio', 'Next.js', 'TypeScript', 'AI Research', 'IoT', 'Web Development'],
-  authors: [{ name: 'Timo Möbes' }],
-  creator: 'Timo Möbes',
-  publisher: 'Timo Möbes',
+  description,
+  keywords: [
+    "Timo Möbes",
+    "AI Workflow Architect",
+    "Agent Builder",
+    "AI Consulting",
+    "OpenClaw Consulting",
+    "AI Automation",
+    "SaaS Builder",
+    "Healthcare Technology",
+    "CRM Automation",
+    "AI Workflow Implementation",
+  ],
+  authors: [{ name: "Timo Möbes" }],
+  creator: "Timo Möbes",
+  publisher: "Timo Möbes",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://your-domain.com'),
+  metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://your-domain.com',
-    title: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
-    description: 'AI Developer, Software Engineer, and Healthcare Technology Specialist. Explore my portfolio showcasing AI research agents, IoT projects, and modern web applications.',
-    siteName: 'Timo Möbes Portfolio',
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    title,
+    description,
+    siteName: "Timo Möbes Portfolio",
     images: [
       {
-        url: '/og-default.jpg',
+        url: "/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: 'Timo Möbes Portfolio',
+        alt: "Timo Möbes portfolio - AI workflow architect and agent builder",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Timo Möbes - AI-First SaaS Builder & Technical Consultant',
-    description: 'AI Developer, Software Engineer, and Healthcare Technology Specialist.',
-    images: ['/og-default.jpg'],
-    creator: '@your_twitter_handle',
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-default.jpg"],
   },
   robots: {
     index: true,
@@ -49,19 +63,14 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
-  viewport: 'width=device-width, initial-scale=1',
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>{children}</body>

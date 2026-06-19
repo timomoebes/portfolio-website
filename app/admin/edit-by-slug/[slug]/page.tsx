@@ -61,7 +61,7 @@ export default function EditBySlugPage() {
         router.replace(`/admin/edit/${data.id}`)
       } catch (error) {
         console.error('Error:', error)
-        setError(`Unexpected error: ${error.message}`)
+        setError(`Unexpected error: ${error instanceof Error ? error.message : String(error)}`)
         setLoading(false)
       }
     }

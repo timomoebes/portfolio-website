@@ -38,6 +38,6 @@ export const Dialog = ({ open, onOpenChange, children }: DialogProps) => {
   )
 }
 
-export const DialogContent = ({ children }: { children: ReactNode }) => {
-  return <div>{children}</div>
+export const DialogContent = ({ children, className = "" }: { children: ReactNode; className?: string }) => {
+  return <div className={className}>{children}</div>
 }
