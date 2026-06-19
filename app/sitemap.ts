@@ -1,16 +1,8 @@
 import { MetadataRoute } from 'next'
-import { supabase } from '@/lib/supabase'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://your-domain.com'
+  const baseUrl = 'https://timomoebes.com'
 
-  const { data: posts } = await supabase
-    .from('blog_posts')
-    .select('slug, updated_at, date')
-    .eq('published', true)
-    .not('slug', 'is', null)
-
-  // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
@@ -56,7 +48,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Blog post pages (from Supabase)
+  const hasSupabaseEnv = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+
+  if (!hasSupabaseEnv) {
+    return staticPages
+  }
+
+  const { supabase } = await import('@/lib/supabase')
+  const { data: posts } = await supabase
+    .from('blog_posts')
+    .select('slug, updated_at, date')
+    .eq('published', true)
+    .not('slug', 'is', null)
+
   const blogPages: MetadataRoute.Sitemap = posts?.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.updated_at),

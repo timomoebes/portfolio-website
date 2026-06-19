@@ -7,6 +7,13 @@ import Link from "next/link"
 
 const projects = [
   {
+    title: "OpenClaw Consulting",
+    tech: "AI workflow audit, OpenClaw implementation, human-approved automation, agentic operations",
+    websiteUrl: "https://www.openclawconsulting.online/",
+    description:
+      "Current consulting venture for AI workflow audit and OpenClaw implementation consulting. Helps founder-led businesses diagnose the workflow worth fixing first, then build practical human-approved automation around lead handling, CRM enrichment, post-call execution, reporting loops, and internal operations.",
+  },
+  {
     title: "Gym Directory SaaS - Cyprus",
     tech: "Web scraping, data enrichment, SEO, full-stack, Vercel, AI-assisted development",
     description:
