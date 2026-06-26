@@ -71,7 +71,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
                 See proof of work <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
-                href="https://www.openclawconsulting.online/"
+                href="https://www.openclawconsulting.online/ai-workflow-audit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-bold transition border ${
@@ -80,7 +80,7 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
                     : "border-slate-300 bg-white/80 text-slate-900 hover:bg-white"
                 }`}
               >
-                Work with me through OpenClaw <ExternalLink className="w-4 h-4" />
+                Start with the OpenClaw audit <ExternalLink className="w-4 h-4" />
               </Link>
             </div>
 
@@ -125,6 +125,15 @@ export default function HeroSection({ chatQuery }: HeroSectionProps) {
           >
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-300 mb-4">What the portfolio proves</p>
             <div className="space-y-5">
+              <div className={`rounded-2xl border p-4 ${isDark ? "border-blue-300/25 bg-blue-400/10" : "border-blue-200 bg-blue-50"}`}>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-2">Looking for consulting?</p>
+                <h2 className="text-xl font-bold mb-2">I now do consulting work through OpenClaw.</h2>
+                <p className={isDark ? "text-slate-300" : "text-slate-600"}>Start with a paid AI Workflow Audit if the first automation worth building is unclear, or use OpenClaw when the workflow is already ready for implementation scope.</p>
+                <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                  <Link href="https://www.openclawconsulting.online/ai-workflow-audit" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full bg-blue-500 px-4 py-2 text-sm font-bold text-white hover:bg-blue-400">Start with the audit</Link>
+                  <Link href="https://www.openclawconsulting.online/ai-workflow-leak-checklist" target="_blank" rel="noopener noreferrer" className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-bold border ${isDark ? "border-white/20 text-white hover:bg-white/10" : "border-slate-300 text-slate-900 hover:bg-white"}`}>Use the checklist</Link>
+                </div>
+              </div>
               <div>
                 <h2 className="text-xl font-bold mb-1">AI implementation, not AI theatre</h2>
                 <p className={isDark ? "text-slate-300" : "text-slate-600"}>Workflow audits, agentic operations, human approval gates, and evidence-driven handoffs.</p>

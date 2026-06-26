@@ -64,7 +64,7 @@ export const portfolioKnowledge: PortfolioSource[] = [
     title: "Capabilities",
     type: "capability",
     summary:
-      "Timo builds AI workflow implementation, agent workflows, prompt/system design, CRM enrichment, reporting loops, Next.js/React products, TypeScript, Vercel, Supabase/SQL, SEO systems, APIs, Python, Node.js, Docker, Linux/Bash, documentation, QA logs, and client handoffs.",
+      "Timo builds AI workflow implementation, agent workflows, prompt/system design, CRM enrichment, reporting loops, Next.js/React products, TypeScript, Vercel, SEO systems, APIs, Python, Node.js, Docker, Linux/Bash, documentation, QA logs, and client handoffs.",
     tags: ["capabilities", "skills", "typescript", "next.js", "python", "node", "supabase", "vercel", "apis", "qa", "documentation"],
   },
   {
