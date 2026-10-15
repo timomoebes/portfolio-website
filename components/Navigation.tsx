@@ -6,6 +6,7 @@ import { useTheme } from "./ThemeProvider"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { useIsMobile } from "../hooks/use-mobile"
 import type React from "react"
+import BrandMark from "./BrandMark"
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -58,7 +59,7 @@ export default function Navigation() {
       <>
         <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }} className="fixed top-4 left-4 right-4 z-50">
           <div className={`px-4 py-3 rounded-2xl backdrop-blur-md flex items-center justify-between ${theme === "dark" ? "bg-white/10 border border-white/20" : "bg-white/90 border border-gray-200/50 shadow-lg"}`}>
-            <div className={`font-semibold text-base ${theme === "dark" ? "text-white" : "text-gray-900"}`}>Timo Möbes</div>
+            <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} aria-label="Timo Möbes — Home" className={`flex h-[44px] w-[44px] items-center justify-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${theme === "dark" ? "text-white" : "text-gray-900"}`}><BrandMark className="h-[36px] w-[36px]" /></a>
             <div className="flex items-center gap-3">
               <button onClick={toggleTheme} className={`p-2 rounded-full transition-colors ${theme === "dark" ? "bg-white/10 text-gray-300 hover:bg-white/20" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}>
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -93,7 +94,8 @@ export default function Navigation() {
     <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} transition={{ duration: 0.5 }} className="fixed top-4 left-0 right-0 z-50 flex justify-center">
       <div className={`px-2 py-2 rounded-full backdrop-blur-md ${theme === "dark" ? "bg-white/10 border border-white/20" : "bg-white/70 border border-gray-200/50 shadow-lg"}`}>
         <div className="flex items-center gap-1">
-          {navItems.map((item) => (
+          <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} aria-label="Timo Möbes — Home" className={`flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full mr-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}><BrandMark className="h-[32px] w-[32px]" /></a>
+          {navItems.filter((item) => item.href !== "#hero").map((item) => (
             <a key={item.name} href={item.href} onClick={(e) => handleScroll(e, item.href)} className={`px-3 py-2 rounded-full text-sm transition-colors duration-200 ${theme === "dark" ? "text-gray-300 hover:text-white hover:bg-white/10" : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"}`}>
               {item.name}
             </a>
